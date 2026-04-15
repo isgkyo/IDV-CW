@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GDP vs Olympic Medals</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>GDP vs Medal</h1>
+  <div class="subtitle">
+    Explore the relationship between countries’ GDP and Olympic medal performance by year. One point represents one country in the selected Olympic year.
+  </div>
+
+  <div class="controls">
+    <div class="control-group">
+      <label for="yearSlider">Year</label>
+      <div class="slider-row">
+        <input id="yearSlider" type="range" />
+        <div id="yearValue" class="year-value"></div>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label>Medal Type</label>
+      <div class="multi-dropdown" id="medalDropdown">
+        <button type="button" class="dropdown-button" id="medalButton">All</button>
+        <div class="dropdown-panel" id="medalPanel">
+          <input type="text" id="medalSearch" class="dropdown-search" placeholder="Enter search text" />
+          <label class="dropdown-option all-option">
+            <input type="checkbox" id="medalAll" checked />
+            <span>(All)</span>
+          </label>
+          <div id="medalOptions" class="dropdown-options"></div>
+        </div>
+      </div>
+      <div class="filter-note">Search and tick medal types to filter</div>
+    </div>
+
+    <div class="control-group">
+      <label>Country</label>
+      <div class="multi-dropdown" id="countryDropdown">
+        <button type="button" class="dropdown-button" id="countryButton">All</button>
+        <div class="dropdown-panel" id="countryPanel">
+          <input type="text" id="countrySearch" class="dropdown-search" placeholder="Enter search text" />
+          <label class="dropdown-option all-option">
+            <input type="checkbox" id="countryAll" checked />
+            <span>(All)</span>
+          </label>
+          <div id="countryOptions" class="dropdown-options"></div>
+        </div>
+      </div>
+      <div class="filter-note">Search and tick countries to filter</div>
+    </div>
+
+    <div class="control-group">
+      <label>Area</label>
+      <div class="multi-dropdown" id="areaDropdown">
+        <button type="button" class="dropdown-button" id="areaButton">All</button>
+        <div class="dropdown-panel" id="areaPanel">
+          <input type="text" id="areaSearch" class="dropdown-search" placeholder="Enter search text" />
+          <label class="dropdown-option all-option">
+            <input type="checkbox" id="areaAll" checked />
+            <span>(All)</span>
+          </label>
+          <div id="areaOptions" class="dropdown-options"></div>
+        </div>
+      </div>
+      <div class="filter-note">Search and tick areas to filter</div>
+    </div>
+  </div>
+
+  <div id="chart-wrapper">
+    <svg id="chart"></svg>
+  </div>
+
+  <div id="legend" class="legend"></div>
+  <div class="note">
+    X-axis uses a logarithmic scale to reduce compression among lower-GDP countries. If multiple medal types are selected, medal counts are summed within each country for the chosen year.
+  </div>
+
+  <div id="tooltip" class="tooltip"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
