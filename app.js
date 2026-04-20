@@ -42,14 +42,14 @@ g.append("text")
   .attr("class", "x-axis-label")
   .attr("text-anchor", "middle")
   .style("font-size", "14px")
-  .text("GDP (log scale)");
+  .text("GDP");
 
 g.append("text")
   .attr("class", "y-axis-label")
   .attr("transform", "rotate(-90)")
   .attr("text-anchor", "middle")
   .style("font-size", "14px")
-  .text("Medal Count");
+  .text("Count of Medal Type");
 
 const regressionGroup = g.append("g");
 const pointsGroup = g.append("g");
@@ -90,7 +90,7 @@ const dropdowns = {
   }
 };
 
-d3.csv("gdp_medals.csv", d => ({
+d3.csv("data/gdp_medals.csv", d => ({
   Year: +d.Year,
   Country: d.Country,
   Area: d.Area,
@@ -227,15 +227,26 @@ function update() {
     .nice()
     .range([innerHeight, 0]);
 
-  xAxisGroup.transition().duration(500).call(d3.axisBottom(x).ticks(12, "~s"));
-  yAxisGroup.transition().duration(500).call(d3.axisLeft(y).ticks(8));
+  xAxisGroup.transition().duration(500).call(
+    d3.axisBottom(x).ticks(12, "~s")
+  );
+
+  yAxisGroup.transition().duration(500).call(
+    d3.axisLeft(y).ticks(8)
+  );
 
   xGridGroup.transition().duration(500).call(
-    d3.axisBottom(x).ticks(12, "~s").tickSize(-innerHeight).tickFormat("")
+    d3.axisBottom(x)
+      .ticks(12, "~s")
+      .tickSize(-innerHeight)
+      .tickFormat("")
   );
 
   yGridGroup.transition().duration(500).call(
-    d3.axisLeft(y).ticks(8).tickSize(-innerWidth).tickFormat("")
+    d3.axisLeft(y)
+      .ticks(8)
+      .tickSize(-innerWidth)
+      .tickFormat("")
   );
 
   const topLabelCountries = grouped
